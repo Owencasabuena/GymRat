@@ -1,0 +1,11 @@
+:root {
+  /* Colors */
+  --color-dark: #1e1e2e;
+  --color-primary: #847ae8;
+  --color-bg: #ffffff;
+  --color-gray: #cccccc;
+
+  /* Typography */
+  --font-body: "Roboto Mono", monospace;
+  --font-heading: "Oswald", sans-serif;
+}
