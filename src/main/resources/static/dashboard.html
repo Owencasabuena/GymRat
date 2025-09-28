@@ -3,9 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboard</title>
 </head>
 <body>
+<h2>GymRat Dashboard</h2>
+<button id="logoutBtn">Logout</button>
 
+<h3>Add Program</h3>
+<form class="programForm">
+    <input type="text" name="name" placeholder="Program Name" required>
+    <button type="submit">Add Program</button>
+</form>
+
+<h3>Your Programs</h3>
+<ul class="programList"></ul>
+
+<script src="/js/dashboard.js" defer></script>
 </body>
 </html>

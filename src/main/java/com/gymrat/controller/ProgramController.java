@@ -9,18 +9,27 @@ import java.util.List;
 @RestController
 @RequestMapping("/programs")
 public class ProgramController {
-    private final ProgramRepository programRepository;
+    private ProgramRepository programRepository;
 
-     public ProgramController(ProgramRepository programRepository) {
-         this.programRepository = programRepository;
-     }
+    @GetMapping("/user/{userId}")
+    public List<Program> getUserPrograms(@PathVariable Long userId) {
+        return programRepository.findByUserId(userId);
+    }
 
-     @GetMapping
-     public List<Program> getAllPrograms() {
-         return programRepository.findAll();
-     }
+    @PostMapping
+    public Program addProgram(@RequestBody Program program) {
+        return programRepository.save(program);
+    }
 
-     public Program createProgram(@RequestBody Program program) {
-         return programRepository.save(program);
-     }
+    @PutMapping("/{id}")
+    public Program editProgram(@PathVariable Long id, @RequestBody Program updated) {
+        Program program = programRepository.findById(id).orElseThrow();
+        program.setName(updated.getName());
+        return programRepository.save(program);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteProgram(@PathVariable Long id) {
+        programRepository.deleteById(id);
+    }
 }
