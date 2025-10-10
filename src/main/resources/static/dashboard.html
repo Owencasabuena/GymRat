@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GymRat</title>
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/global.css">
+</head>
+
+<body>
+<header>
+    <div class="logo">
+        <img src="/assets/img/logo.png" alt="GymRat logo">
+        <h2><span>Gym</span><span>Rat</span></h2>
+    </div>
+
+    <nav class="navbar">
+        <ul>
+            <li><a href="">Settings</a></li>
+            <li><a class="primary-btn btn" href="">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main class="container">
+    <section class="timer-section">
+        <h2>Timer</h2>
+        <div class="timer-container">
+            <div class="timer-display">
+                02:00
+            </div>
+
+            <div class="preset-btn-container">
+                <button class="preset-btn btn">45secs</button>
+                <button class="preset-btn btn">1min</button>
+                <button class="preset-btn btn">2mins</button>
+                <button class="custom-btn btn">Custom</button>
+            </div>
+
+            <div class="custom-input-container">
+                <form class="custom-input-form">
+                    <label for="">Set Custom Time (MM:SS)</label>
+                    <div>
+                        <input class="custom-input-input" type="number" name="customMinutes" placeholder="MM"
+                               min="0" max="59" value="0">
+                        <input class="custom-input-input" type="number" name="customSeconds" placeholder="SS"
+                               min="0" max="59" value="0">
+                        <button type="submit" class="custom-btn btn">Set</button>
+                    </div>
+                    <p class="custom-error">Time should be greater than zero.</p>
+                </form>
+
+            </div>
+
+            <div class="ctrl-btn-container">
+                <button class="ctrl-btn start-pause-btn">Start</button>
+                <button class="ctrl-btn reset-btn">Reset</button>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="routine-section">
+        <h2>Routines</h2>
+        <div class="card-routine">
+            <div>
+                <p class="routine-name">Routine name</p>
+                <p class="routine-description">blablablablabla...</p>
+            </div>
+            <div class="action-btn-container">
+                <button class="edit-routine-btn"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
+                    </path>
+                </svg></button>
+                <button class="delete-routine-btn"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                    </path>
+                </svg></button>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+
+</html>
