@@ -80,6 +80,7 @@ header {
     justify-content: center;
     align-items: center;
     gap: 1rem;
+    padding-bottom: 1rem;
 }
 
 .preset-btn {
@@ -90,8 +91,14 @@ header {
 }
 
 .custom-btn {
+    width: 6rem;
     background-color: var(--primary-color);
     box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.25);
+}
+
+.submit-custom-btn {
+    background-color: var(--primary-color);
+    border-radius: 5rem;
 }
 
 .ctrl-btn-container {
@@ -121,8 +128,20 @@ header {
 }
 
 .custom-input-container {
-    padding: 1.3rem;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
 }
+
+.custom-input-container.show {
+  opacity: 1;
+  max-height: 200px;
+  transform: translateY(0);
+  padding-bottom: 1rem
+}
+
 
 .custom-input-form {
     display: grid;
@@ -145,9 +164,24 @@ header {
 }
 
 .custom-error {
-    font-size: 1rem;
-    font-weight: 400;
-    color: hsl(0, 97%, 46%);
+  opacity: 0;
+  color: red;
+  transition: opacity 0.3s ease;
+}
+
+.custom-error.show {
+  opacity: 1;
+}
+
+
+.routine-container {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.add-routine-btn {
+    width: 100%;
 }
 
 .card-routine {
