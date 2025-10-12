@@ -213,3 +213,61 @@ header {
     fill: none;
     stroke: var(--primary-color);
 }
+
+.routine-modal {
+    position: fixed;
+    padding: 2rem;
+    border: none;
+    border-radius: 1rem;
+    width: 20rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+}
+
+.routine-form {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1rem;
+}
+
+.form-group input,
+.form-group textarea {
+    font-size: 1rem;
+    font-weight: 200;
+    outline: none;
+}
+
+.routine-modal h2 {
+    font-weight: 400;
+    font-size: 1.5rem;
+}
+
+.form-group label {
+    font-size: 1rem;
+    font-weight: 300;
+    padding-bottom: .2rem;
+}
+
+.form-group p.error-message {
+    color: red;
+    font-size: 1rem;
+    font-weight: 200;
+}
+
+.dialog-actions {
+    display: flex;
+    justify-content: end;
+    gap: 1rem;
+}
+
+.cancel-btn {
+    all: unset;
+    color: var(--primary-color);
+}

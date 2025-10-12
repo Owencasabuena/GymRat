@@ -87,6 +87,36 @@
             </div>
         </div>
     </section>
+
+    <dialog class="routine-modal">
+        <h2>Add new routine</h2>
+        <form class="routine-form" method="dialog">
+            <div class="form-group">
+                <label for="routineName">Routine Name</label>
+                <input type="text" id="routineName" name="routineName">
+                <p class="error-message"></p>
+            </div>
+            <div class="form-group">
+                <label for="routineDescription">Description</label>
+                <textarea id="routineDescription" name="routineDescription" rows="3"></textarea>
+                <p class="error-message"></p>
+            </div>
+            <div class="dialog-actions">
+                <button type="button" class="cancel-btn">Cancel</button>
+                <button type="submit" class="btn primary-btn save-btn">Save</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog class="delete-confirmation">
+        <form method="dialog" class="delete-form">
+            <p>Are you sure you want to delete this routine?</p>
+            <div class="btn-group">
+                <button value="cancel" class="cancel-delete-btn">Cancel</button>
+                <button value="confirm" class="confirm-delete-btn">Delete</button>
+            </div>
+        </form>
+    </dialog>
 </main>
 
 <script type="module" src="/js/dashboard.js"></script>
