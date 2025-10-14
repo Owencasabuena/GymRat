@@ -33,9 +33,24 @@ input, button, textarea, select {
   font: inherit;
 }
 
+/* 7b. Reset button styles */
+button {
+  font: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: inherit;
+}
+
 /* 8. Avoid text overflows */
 p, h1, h2, h3, h4, h5, h6 {
   overflow-wrap: break-word;
+}
+
+ul, ol {
+  list-style: none;
+  padding: 0;
 }
 
 /* 9. Improve line wrapping */
@@ -46,9 +61,35 @@ h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
 }
 
-/*
-  10. Create a root stacking context
-*/
+/* 10. Create a root stacking context */
 #root, #__next {
   isolation: isolate;
+}
+
+/* 11. Better focus styles */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Remove default outline */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* 12. Reset dialog styles */
+dialog {
+  border: none;
+  padding: 0;
+  max-width: none;
+  max-height: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+}
+
+dialog::backdrop {
+  background-color: oklch(0% 0 0 / 0.5);
 }

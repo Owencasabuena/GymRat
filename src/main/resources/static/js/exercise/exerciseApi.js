@@ -29,52 +29,48 @@ async function handleResponse(response) {
         );
     }
 
-    if (response.status === 204) {
-        return null;
-    }
-
-    const contentType = response.headers.get('content-type');
-    if (!contentType || !contentType.includes('application/json')) {
-        return null;
-    }
-
-    const text = await response.text();
-    if (!text || text.trim().length === 0) {
+    if (response.status === 204 || response.headers.get('content-length') === '0') {
         return null;
     }
 
     try {
-        return JSON.parse(text);
+        const text = await response.text();
+        return text && text.trim() ? JSON.parse(text) : null;
     } catch (error) {
-        console.warn('Failed to parse JSON response:', text);
+        console.warn('Failed to parse response:', error);
         return null;
     }
 }
 
-export async function getAllRoutines() {
-    const response = await fetchWithTimeout(`${API_BASE_URL}/routines`);
-    return handleResponse(response);
-}
-
-export async function getRoutine(routineId) {
+export async function getExercises(routineId) {
     const response = await fetchWithTimeout(
-        `${API_BASE_URL}/routines/${routineId}`
+        `${API_BASE_URL}/routine/${routineId}/exercises`
     );
     return handleResponse(response);
 }
 
-export async function createRoutine(routineData) {
-    const response = await fetchWithTimeout(`${API_BASE_URL}/routines`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(routineData)
-    });
+export async function getExercise(routineId, exerciseId) {
+    const response = await fetchWithTimeout(
+        `${API_BASE_URL}/routine/${routineId}/exercises/${exerciseId}`
+    );
     return handleResponse(response);
 }
 
-export async function updateRoutine(routineId, updatedData) {
+export async function createExercise(routineId, exerciseData) {
     const response = await fetchWithTimeout(
-        `${API_BASE_URL}/routines/${routineId}`,
+        `${API_BASE_URL}/routine/${routineId}/exercises`,
+        {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(exerciseData)
+        }
+    );
+    return handleResponse(response);
+}
+
+export async function updateExercise(routineId, exerciseId, updatedData) {
+    const response = await fetchWithTimeout(
+        `${API_BASE_URL}/routine/${routineId}/exercises/${exerciseId}`,
         {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
@@ -87,11 +83,10 @@ export async function updateRoutine(routineId, updatedData) {
     return handleResponse(response);
 }
 
-export async function deleteRoutine(routineId) {
+export async function deleteExercise(routineId, exerciseId) {
     const response = await fetchWithTimeout(
-        `${API_BASE_URL}/routines/${routineId}`,
+        `${API_BASE_URL}/routine/${routineId}/exercises/${exerciseId}`,
         { method: 'DELETE' }
     );
     return handleResponse(response);
 }
-
