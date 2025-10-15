@@ -11,7 +11,6 @@ const elements = {
     setsInput: () => document.getElementById("exerciseSets"),
     repsInput: () => document.getElementById("exerciseReps"),
     durationInput: () => document.getElementById("exerciseDuration"),
-    weightInput: () => document.getElementById("exerciseWeight"),
     repsGroup: () => document.getElementById("repsGroup"),
     durationGroup: () => document.getElementById("durationGroup"),
     typeRadios: () => document.querySelectorAll('input[name="exerciseType"]'),
@@ -170,8 +169,9 @@ function openAddExerciseModal(routineId) {
     // Reset to reps by default
     const repsRadio = document.querySelector('input[name="exerciseType"][value="reps"]');
     if (repsRadio) repsRadio.checked = true;
-    elements.repsGroup().removeAttribute('hidden');
-    elements.durationGroup().setAttribute('hidden', '');
+
+    // Call handleTypeChange to show/hide correct inputs
+    handleTypeChange();
 
     elements.modal().showModal();
     setTimeout(() => elements.nameInput().focus(), 100);
@@ -187,7 +187,6 @@ function openEditExerciseModal(routineId, exercise) {
     // Populate form
     elements.nameInput().value = exercise.name;
     elements.setsInput().value = exercise.sets;
-    elements.weightInput().value = exercise.weight || '';
 
     if (exercise.reps) {
         const repsRadio = document.querySelector('input[name="exerciseType"][value="reps"]');
@@ -302,7 +301,6 @@ async function handleFormSubmit(e) {
 
     const name = elements.nameInput().value.trim();
     const sets = parseInt(elements.setsInput().value);
-    const weight = parseFloat(elements.weightInput().value) || null;
     const type = document.querySelector('input[name="exerciseType"]:checked')?.value || 'reps';
 
     let reps = null;
@@ -319,9 +317,9 @@ async function handleFormSubmit(e) {
     }
 
     const exerciseData = {
+        id: state.editingExerciseId,
         name,
         sets,
-        weight,
         ...(type === 'reps' ? { reps } : { duration })
     };
 
@@ -333,7 +331,6 @@ async function handleFormSubmit(e) {
     let success = false;
 
     if (state.isEditing) {
-        exerciseData.id = state.editingExerciseId;
         success = await handleUpdateExercise(state.currentRoutineId, state.editingExerciseId, exerciseData);
     } else {
         success = await handleCreateExercise(state.currentRoutineId, exerciseData);

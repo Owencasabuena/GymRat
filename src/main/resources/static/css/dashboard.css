@@ -1,4 +1,67 @@
-/* ======================
+.routine-card__exercises-header h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+/* Exercises List */
+.exercises-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.exercises-empty {
+    text-align: center;
+    color: var(--text-muted);
+    padding: var(--space-lg);
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+.exercise-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-sm) var(--space-md);
+    background-color: var(--bg-light);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-light);
+    transition: var(--transition-fast);
+    gap: var(--space-md);
+}
+
+.exercise-item:hover {
+    box-shadow: var(--shadow-sm);
+}
+
+.exercise-item__content {
+    flex: 1;
+    min-width: 0; /* Allow text truncation */
+}
+
+.exercise-item__name {
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: var(--space-xs);
+}
+
+.exercise-item__details {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.exercise-item__actions {
+    display: flex;
+    gap: var(--space-xs);
+    flex-shrink: 0; /* Keep buttons on the right */
+}
+
+/* Exercise item animations */
+.exercise-item {
+    transition: opacity 0.2s, transform 0.2s, box-shadow var(--transition-fast);
+}
+    /* ======================
    BUTTONS
    ====================== */
 
@@ -483,6 +546,10 @@
     display: flex;
     flex-direction: column;
     margin-bottom: var(--space-md);
+}
+
+.form-group[hidden] {
+    display: none !important;
 }
 
 .form-group__label {
