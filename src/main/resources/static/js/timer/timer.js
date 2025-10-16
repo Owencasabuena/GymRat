@@ -167,7 +167,7 @@ function requestNotificationPermission() {
 /**
  * Stop the timer
  */
-function stopTimer() {
+export function stopTimer() {
     if (state.timerId) {
         clearInterval(state.timerId);
         state.timerId = null;
@@ -180,7 +180,7 @@ function stopTimer() {
 /**
  * Start the timer
  */
-function startTimer() {
+export function startTimer() {
     if (state.remainingTime <= 0) return;
 
     state.isRunning = true;
@@ -213,7 +213,7 @@ function pauseTimer() {
 /**
  * Reset timer to initial time
  */
-function resetTimer() {
+export function resetTimer() {
     stopTimer();
     state.remainingTime = state.initialTime;
     updateDisplay(state.remainingTime);
@@ -222,7 +222,7 @@ function resetTimer() {
 /**
  * Set new time and update display
  */
-function setTime(seconds) {
+export function setTime(seconds) {
     stopTimer();
     state.remainingTime = seconds;
     state.initialTime = seconds;

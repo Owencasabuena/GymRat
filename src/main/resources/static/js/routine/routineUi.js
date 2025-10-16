@@ -1,5 +1,6 @@
 import { getAllRoutines, getRoutine, createRoutine, deleteRoutine, updateRoutine } from '/js/routine/routineApi.js';
 import { renderExercises } from '/js/exercise/exerciseUi.js';
+import { startWorkout } from '../workout/workoutManager.js';
 
 // ==========================================
 // DOM SELECTORS (cached for performance)
@@ -188,9 +189,14 @@ async function expandCard(card, routineId) {
             <div class="routine-card__exercises">
                 <div class="routine-card__exercises-header">
                     <h4>Exercises</h4>
-                    <button class="btn btn--primary btn--sm btn--add-exercise" data-routine-id="${routineId}">
-                        Add Exercise
-                    </button>
+                    <div style="display: flex; gap: var(--space-sm);">
+                        <button class="btn btn--primary btn--sm btn--start-workout" data-routine-id="${routineId}">
+                            Start Workout
+                        </button>
+                        <button class="btn btn--primary btn--sm btn--add-exercise" data-routine-id="${routineId}">
+                            Add Exercise
+                        </button>
+                    </div>
                 </div>
                 <div class="exercises-list" id="exercises-list-${routineId}"></div>
             </div>
@@ -483,6 +489,30 @@ function setupEventListeners() {
 
     elements.modal().addEventListener('click', handleModalBackdropClick);
     elements.deleteModal().addEventListener('click', handleModalBackdropClick);
+
+    document.addEventListener('click', async (e) => {
+        const startBtn = e.target.closest('.btn--start-workout');
+        if (startBtn) {
+            e.stopPropagation();
+            const routineId = startBtn.dataset.routineId;
+
+            try {
+                // Fetch fresh routine data with exercises from API
+                const routine = await getRoutine(routineId);
+
+                if (!routine.exercises || routine.exercises.length === 0) {
+                    showWorkoutError('No exercises in this routine! Add some exercises first.');
+                    return;
+                }
+
+                startWorkout(routineId, routine.name, routine.exercises);
+            } catch (error) {
+                console.error('Failed to start workout:', error);
+                showWorkoutError('Failed to start workout. Please try again.');
+            }
+            return;
+        }
+    });
 }
 
 // ==========================================
