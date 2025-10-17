@@ -12,4 +12,5 @@ import java.util.UUID;
 public interface RoutineRepository extends JpaRepository<Routine, UUID> {
     List<Routine> findByExercises_Id(UUID exerciseId);
     Optional<Routine> findByExercises_IdAndId(UUID exerciseId, UUID id);
+    List<Routine> findByUserId(Long userId);
 }

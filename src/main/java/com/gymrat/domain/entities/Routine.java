@@ -2,6 +2,7 @@ package com.gymrat.domain.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -21,19 +22,34 @@ public class Routine {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "routine", cascade = {
-            CascadeType.REMOVE, CascadeType.PERSIST
-    })
-    private List<Exercise> exercises;
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
+
+    @OneToMany(
+            mappedBy = "routine",
+            cascade = {CascadeType.REMOVE, CascadeType.PERSIST},
+            fetch = FetchType.LAZY
+    )
+    private List<Exercise> exercises = new ArrayList<>();
 
     public Routine() {
     }
 
+    // Constructor without userId (for backward compatibility)
     public Routine(UUID id, String name, String description, List<Exercise> exercises) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.exercises = exercises;
+        this.exercises = exercises != null ? exercises : new ArrayList<>();
+    }
+
+    // Constructor with userId
+    public Routine(UUID id, String name, String description, Long userId, List<Exercise> exercises) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.userId = userId;
+        this.exercises = exercises != null ? exercises : new ArrayList<>();
     }
 
     public UUID getId() {
@@ -60,6 +76,14 @@ public class Routine {
         this.description = description;
     }
 
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
     public List<Exercise> getExercises() {
         return exercises;
     }
@@ -72,12 +96,12 @@ public class Routine {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Routine routine = (Routine) o;
-        return Objects.equals(id, routine.id) && Objects.equals(name, routine.name) && Objects.equals(description, routine.description) && Objects.equals(exercises, routine.exercises);
+        return Objects.equals(id, routine.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, exercises);
+        return Objects.hash(id);
     }
 
     @Override
@@ -86,7 +110,7 @@ public class Routine {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", exercises=" + exercises +
+                ", userId=" + userId +
                 '}';
     }
 }

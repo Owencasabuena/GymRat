@@ -1,13 +1,31 @@
+import { getToken } from '/js/auth/authService.js';
+
 const API_BASE_URL = 'http://localhost:8080';
 const API_TIMEOUT = 10000;
+
+// Helper to get auth headers
+function getAuthHeaders() {
+    const token = getToken();
+    return {
+        'Content-Type': 'application/json',
+        'Authorization': token ? `Bearer ${token}` : ''
+    };
+}
 
 async function fetchWithTimeout(url, options = {}, timeout = API_TIMEOUT) {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), timeout);
 
     try {
+        // Merge auth headers with any provided headers
+        const headers = {
+            ...getAuthHeaders(),
+            ...options.headers
+        };
+
         const response = await fetch(url, {
             ...options,
+            headers,
             signal: controller.signal
         });
         clearTimeout(timeoutId);
@@ -66,7 +84,6 @@ export async function getRoutine(routineId) {
 export async function createRoutine(routineData) {
     const response = await fetchWithTimeout(`${API_BASE_URL}/routines`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(routineData)
     });
     return handleResponse(response);
@@ -77,7 +94,6 @@ export async function updateRoutine(routineId, updatedData) {
         `${API_BASE_URL}/routines/${routineId}`,
         {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 id: routineId,
                 ...updatedData
@@ -94,4 +110,3 @@ export async function deleteRoutine(routineId) {
     );
     return handleResponse(response);
 }
-

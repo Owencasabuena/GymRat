@@ -1,13 +1,31 @@
+import { getToken } from '/js/auth/authService.js';
+
 const API_BASE_URL = 'http://localhost:8080';
 const API_TIMEOUT = 10000;
+
+// Helper to get auth headers
+function getAuthHeaders() {
+    const token = getToken();
+    return {
+        'Content-Type': 'application/json',
+        'Authorization': token ? `Bearer ${token}` : ''
+    };
+}
 
 async function fetchWithTimeout(url, options = {}, timeout = API_TIMEOUT) {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), timeout);
 
     try {
+        // Merge auth headers with any provided headers
+        const headers = {
+            ...getAuthHeaders(),
+            ...options.headers
+        };
+
         const response = await fetch(url, {
             ...options,
+            headers,
             signal: controller.signal
         });
         clearTimeout(timeoutId);
@@ -61,7 +79,6 @@ export async function createExercise(routineId, exerciseData) {
         `${API_BASE_URL}/routine/${routineId}/exercises`,
         {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(exerciseData)
         }
     );
@@ -73,9 +90,8 @@ export async function updateExercise(routineId, exerciseId, updatedData) {
         `${API_BASE_URL}/routine/${routineId}/exercises/${exerciseId}`,
         {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                id: routineId,
+                id: exerciseId,
                 ...updatedData
             })
         }

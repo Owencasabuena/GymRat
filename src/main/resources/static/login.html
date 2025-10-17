@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GymRat - Login</title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/auth.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <div class="logo-small">
+                <img src="/assets/img/logo.png" alt="GymRat logo">
+                <h1>GymRat</h1>
+            </div>
+            <p class="auth-subtitle">Welcome back to your workout</p>
+        </div>
+
+        <form class="auth-form" id="loginForm">
+            <div class="form-group">
+                <label class="form-group__label" for="email">Email</label>
+                <input
+                        class="form-group__input"
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                        placeholder="you@example.com"
+                        aria-describedby="emailError">
+                <p class="form-group__error" id="emailError" role="alert"></p>
+            </div>
+
+            <div class="form-group">
+                <label class="form-group__label" for="password">Password</label>
+                <input
+                        class="form-group__input"
+                        type="password"
+                        id="password"
+                        name="password"
+                        required
+                        placeholder="Enter your password"
+                        aria-describedby="passwordError">
+                <p class="form-group__error" id="passwordError" role="alert"></p>
+            </div>
+
+            <div class="auth-error" id="authError" role="alert"></div>
+
+            <button type="submit" class="btn btn--primary btn--block" id="submitBtn">Login</button>
+        </form>
+
+        <div class="auth-footer">
+            <p>Don't have an account? <a href="/register.html" class="auth-link">Sign up</a></p>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="/js/auth/login.js"></script>
+</body>
+</html>

@@ -14,7 +14,7 @@ public class Exercise {
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
-    @Column(name = "name",nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "sets")
@@ -94,12 +94,12 @@ public class Exercise {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Exercise exercise = (Exercise) o;
-        return Objects.equals(id, exercise.id) && Objects.equals(name, exercise.name) && Objects.equals(sets, exercise.sets) && Objects.equals(reps, exercise.reps) && Objects.equals(duration, exercise.duration) && Objects.equals(routine, exercise.routine);
+        return Objects.equals(id, exercise.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, sets, reps, duration, routine);
+        return Objects.hash(id);
     }
 
     @Override
@@ -110,7 +110,6 @@ public class Exercise {
                 ", sets=" + sets +
                 ", reps=" + reps +
                 ", duration=" + duration +
-                ", routine=" + routine +
                 '}';
     }
 }
