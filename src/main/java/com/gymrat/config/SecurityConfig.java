@@ -43,7 +43,9 @@ public class SecurityConfig {
                         .requestMatchers("/assets/**").permitAll()
                         .requestMatchers("/favicon.ico").permitAll()
                         .requestMatchers("/routines/**").authenticated()
-                        .requestMatchers("/routine/**").authenticated()  // Added for exercise endpoints
+                        .requestMatchers("/routine/**").authenticated()
+                        .requestMatchers("/auth/login", "/auth/register").permitAll()
+                        .requestMatchers("/auth/change-password", "/auth/update-profile").authenticated()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

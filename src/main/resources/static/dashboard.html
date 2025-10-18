@@ -22,14 +22,158 @@
     </div>
 
     <nav class="nav" aria-label="Main navigation">
-        <ul class="nav__list">
-            <li class="nav__item">
-                <span class="nav__user-info" id="userInfo">Welcome</span>
-            </li>
-            <li class="nav__item"><a href="/settings" class="nav__link">Settings</a></li>
-            <li class="nav__item"><a href="#" class="btn btn--primary" id="logoutBtn">Logout</a></li>
-        </ul>
+        <div class="nav__user-section">
+            <span class="nav__user-info" id="userInfo">Welcome</span>
+            <div class="nav__item--dropdown">
+                <button class="nav__settings-btn" id="settingsBtn" aria-haspopup="true" aria-expanded="false">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 12.5C11.3807 12.5 12.5 11.3807 12.5 10C12.5 8.61929 11.3807 7.5 10 7.5C8.61929 7.5 7.5 8.61929 7.5 10C7.5 11.3807 8.61929 12.5 10 12.5Z" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M16.25 10C16.25 10.3125 16.2188 10.625 16.1875 10.9062L18.0625 12.3438C18.2188 12.4688 18.2813 12.6875 18.1875 12.875L16.4375 15.875C16.3438 16.0625 16.1563 16.125 15.9688 16.0625L13.75 15.1875C13.3125 15.5 12.8438 15.7813 12.3125 15.9688L12 18.3125C11.9688 18.5 11.8125 18.625 11.625 18.625H8.125C7.9375 18.625 7.78125 18.5 7.75 18.3125L7.4375 15.9688C6.90625 15.7813 6.4375 15.5313 6 15.1875L3.78125 16.0625C3.59375 16.125 3.40625 16.0625 3.3125 15.875L1.5625 12.875C1.46875 12.6875 1.53125 12.4688 1.6875 12.3438L3.5625 10.9062C3.53125 10.625 3.5 10.3125 3.5 10C3.5 9.6875 3.53125 9.375 3.5625 9.09375L1.6875 7.65625C1.53125 7.53125 1.46875 7.3125 1.5625 7.125L3.3125 4.125C3.40625 3.9375 3.59375 3.875 3.78125 3.9375L6 4.8125C6.4375 4.5 6.90625 4.21875 7.4375 4.03125L7.75 1.6875C7.78125 1.5 7.9375 1.375 8.125 1.375H11.625C11.8125 1.375 11.9688 1.5 12 1.6875L12.3125 4.03125C12.8438 4.21875 13.3125 4.46875 13.75 4.8125L15.9688 3.9375C16.1563 3.875 16.3438 3.9375 16.4375 4.125L18.1875 7.125C18.2813 7.3125 18.2188 7.53125 18.0625 7.65625L16.1875 9.09375C16.2188 9.375 16.25 9.6875 16.25 10Z" stroke="currentColor" stroke-width="1.5"/>
+                    </svg>
+                    <span class="sr-only">Settings</span>
+                </button>
+
+                <div class="settings-dropdown" id="settingsDropdown" hidden>
+                    <div class="settings-dropdown__header">
+                        <div class="settings-dropdown__user-avatar">
+                            <span id="userInitials">JD</span>
+                        </div>
+                        <div class="settings-dropdown__user-details">
+                            <div class="settings-dropdown__user-name" id="settingsUserName">John Doe</div>
+                            <div class="settings-dropdown__user-email" id="settingsUserEmail">john@example.com</div>
+                        </div>
+                    </div>
+
+                    <ul class="settings-dropdown__menu">
+                        <li>
+                            <button class="settings-dropdown__item" id="changePasswordBtn">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12.75 6.75V5.25C12.75 3.17893 11.0711 1.5 9 1.5C6.92893 1.5 5.25 3.17893 5.25 5.25V6.75M4.5 16.5H13.5C14.3284 16.5 15 15.8284 15 15V8.25C15 7.42157 14.3284 6.75 13.5 6.75H4.5C3.67157 6.75 3 7.42157 3 8.25V15C3 15.8284 3.67157 16.5 4.5 16.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Change Password
+                            </button>
+                        </li>
+                        <li>
+                            <button class="settings-dropdown__item" id="editProfileBtn">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9 11.25C11.0711 11.25 12.75 9.57107 12.75 7.5C12.75 5.42893 11.0711 3.75 9 3.75C6.92893 3.75 5.25 5.42893 5.25 7.5C5.25 9.57107 6.92893 11.25 9 11.25Z" stroke="currentColor" stroke-width="1.5"/>
+                                    <path d="M14.25 14.25C14.25 12.5931 11.8995 11.25 9 11.25C6.10051 11.25 3.75 12.5931 3.75 14.25" stroke="currentColor" stroke-width="1.5"/>
+                                </svg>
+                                Edit Profile
+                            </button>
+                        </li>
+                    </ul>
+
+                    <div class="settings-dropdown__footer">
+                        <button class="settings-dropdown__item settings-dropdown__item--logout" id="dropdownLogoutBtn">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11.25 12.75L14.25 9.75M14.25 9.75L11.25 6.75M14.25 9.75H6.75M6.75 3.75H5.25C4.42157 3.75 3.75 4.42157 3.75 5.25V13.5C3.75 14.3284 4.42157 15 5.25 15H6.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </nav>
+
+    <!-- Add these modals before the closing </main> tag in dashboard.html -->
+
+    <!-- Change Password Modal -->
+    <dialog class="modal" id="changePasswordModal" aria-labelledby="changePasswordTitle">
+        <h2 class="modal__title" id="changePasswordTitle">Change Password</h2>
+        <form class="modal__form" id="changePasswordForm">
+            <div class="form-group">
+                <label class="form-group__label" for="currentPassword">Current Password</label>
+                <input
+                        class="form-group__input"
+                        type="password"
+                        id="currentPassword"
+                        name="currentPassword"
+                        required
+                        autocomplete="current-password">
+                <p class="form-group__error" id="currentPasswordError" role="alert"></p>
+            </div>
+
+            <div class="form-group">
+                <label class="form-group__label" for="newPassword">New Password</label>
+                <input
+                        class="form-group__input"
+                        type="password"
+                        id="newPassword"
+                        name="newPassword"
+                        required
+                        autocomplete="new-password"
+                        minlength="6">
+                <p class="form-group__error" id="newPasswordError" role="alert"></p>
+            </div>
+
+            <div class="form-group">
+                <label class="form-group__label" for="confirmPassword">Confirm New Password</label>
+                <input
+                        class="form-group__input"
+                        type="password"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        required
+                        autocomplete="new-password">
+                <p class="form-group__error" id="confirmPasswordError" role="alert"></p>
+            </div>
+
+            <div class="auth-error" id="changePasswordAuthError" role="alert"></div>
+
+            <div class="modal__actions">
+                <button type="button" class="btn btn--cancel" id="cancelChangePasswordBtn">Cancel</button>
+                <button type="submit" class="btn btn--primary" id="submitChangePasswordBtn">Change Password</button>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- Edit Profile Modal -->
+    <dialog class="modal" id="editProfileModal" aria-labelledby="editProfileTitle">
+        <h2 class="modal__title" id="editProfileTitle">Edit Profile</h2>
+        <form class="modal__form" id="editProfileForm">
+            <div class="form-group">
+                <label class="form-group__label" for="editFirstName">First Name</label>
+                <input
+                        class="form-group__input"
+                        type="text"
+                        id="editFirstName"
+                        name="firstName"
+                        required>
+                <p class="form-group__error" id="editFirstNameError" role="alert"></p>
+            </div>
+
+            <div class="form-group">
+                <label class="form-group__label" for="editLastName">Last Name</label>
+                <input
+                        class="form-group__input"
+                        type="text"
+                        id="editLastName"
+                        name="lastName"
+                        required>
+                <p class="form-group__error" id="editLastNameError" role="alert"></p>
+            </div>
+
+            <div class="form-group">
+                <label class="form-group__label" for="editEmail">Email</label>
+                <input
+                        class="form-group__input"
+                        type="email"
+                        id="editEmail"
+                        name="email"
+                        required>
+                <p class="form-group__error" id="editEmailError" role="alert"></p>
+            </div>
+
+            <div class="auth-error" id="editProfileAuthError" role="alert"></div>
+
+            <div class="modal__actions">
+                <button type="button" class="btn btn--cancel" id="cancelEditProfileBtn">Cancel</button>
+                <button type="submit" class="btn btn--primary" id="submitEditProfileBtn">Save Changes</button>
+            </div>
+        </form>
+    </dialog>
 </header>
 
 <main class="container">
